@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(
-    "mongodb://127.0.0.1:27017/paytm-clone?replicaSet=rs&directConnection=true"
-);
+mongoose.connect("mongodb://localhost:27017/paytm?replicaSet=rs")
+    .then(() => {
+        console.log("MongoDB connected successfully");
+    })
+    .catch((err) => {
+        console.log("MongoDB connection error:", err);
+    });
 
 const UserSchema = new mongoose.Schema({
-      
     username: {
         type: String,
         required: true,
@@ -32,13 +35,13 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         maxLength: 50
     }
-
 });
 
 const AccountSchema = new mongoose.Schema({
-    userId:{ type: mongoose.Schema.Types.ObjectId,
-        ref: "User", 
-        required: true 
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
     balance: {
         type: Number,
