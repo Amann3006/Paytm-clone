@@ -37,9 +37,9 @@ router.post("/signup", async (req, res) => {
     console.log("EXISTING USER:", existingUser);
 
     if (existingUser) {
-        return res.status(411).json({
-            message: "Email already taken"
-        });
+        return res.status(409).json({
+    message: "Email already taken"
+});
     }
 
     const user = await User.create({
